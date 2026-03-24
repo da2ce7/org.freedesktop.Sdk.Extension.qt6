@@ -1,7 +1,7 @@
 use clap::Parser;
 use qt_sources_gen::sentinel::{self, SentinelStatus};
 use qt_sources_gen::sources::{self, SourcesFile};
-use qt_sources_gen::{CheckResult, client, verify};
+use qt_sources_gen::{CheckResult, client, modules, verify};
 use tracing::{info, warn};
 
 #[derive(Parser)]
@@ -82,8 +82,21 @@ fn run(args: &Args) -> CheckResult {
         }
     };
 
-    // Quick exit: sentinel unchanged, not forcing
-    if !sentinel_changed && !args.force {
+    // Check whether the module set in the sources file matches md5sums.txt
+    let modules_changed = if sentinel_changed {
+        // Already going to regenerate, no need to check
+        false
+    } else if !modules::modules_match(&current.expected_md5s, &existing) {
+        warn!("module set mismatch between md5sums.txt and sources file");
+        true
+    } else {
+        false
+    };
+
+    let needs_update = sentinel_changed || modules_changed;
+
+    // Quick exit: nothing changed, not forcing
+    if !needs_update && !args.force {
         info!("sources are up to date");
         return CheckResult::UpToDate;
     }
@@ -96,7 +109,7 @@ fn run(args: &Args) -> CheckResult {
     }
 
     // Determine whether we're verifying existing hashes or generating new ones
-    let verify_only = !sentinel_changed && args.force;
+    let verify_only = !needs_update && args.force;
     let stored_sha512s = if verify_only {
         info!("force verify — downloading archives to verify MD5 + SHA-512 hashes");
         Some(&existing.sha512s)

@@ -15,6 +15,9 @@ pub struct ModuleHash {
 /// the expected values from `md5sums.txt`. Optionally verify SHA-512 against
 /// previously stored hashes.
 ///
+/// The module list is derived dynamically from the filenames in `expected_md5s`
+/// rather than a hardcoded list.
+///
 /// Returns the ordered list of (filename, sha512) pairs for all modules on success.
 ///
 /// # Errors
@@ -27,22 +30,23 @@ pub fn download_and_verify<S: ::std::hash::BuildHasher>(
 ) -> Result<Vec<ModuleHash>, Error> {
     let (major_minor, _) = modules::split_version(version).ok_or_else(|| Error::InvalidVersion(version.to_string()))?;
 
-    let mut results = Vec::with_capacity(modules::MODULES.len());
+    let filenames = modules::archive_filenames(expected_md5s);
+    let mut results = Vec::with_capacity(filenames.len());
     let mut failures: Vec<Error> = Vec::new();
 
-    for module in modules::MODULES {
-        let filename = modules::archive_filename(module, version);
-        let url = modules::archive_url(major_minor, version, &filename);
+    for filename in &filenames {
+        let module = modules::module_name(filename);
+        let url = modules::archive_url(major_minor, version, filename);
         debug!(module, %url, "downloading");
 
         match client::download_and_hash(client, &url) {
             Ok(hashes) => {
                 // Verify MD5 against md5sums.txt
-                if let Some(expected_md5) = expected_md5s.get(&filename) {
+                if let Some(expected_md5) = expected_md5s.get(filename.as_str()) {
                     if hashes.md5 != *expected_md5 {
                         error!(module, expected = %expected_md5, actual = %hashes.md5, "MD5 mismatch");
                         failures.push(Error::Md5Mismatch {
-                            filename,
+                            filename: filename.clone(),
                             expected: expected_md5.clone(),
                             actual: hashes.md5,
                         });
@@ -55,10 +59,12 @@ pub fn download_and_verify<S: ::std::hash::BuildHasher>(
 
                 // Optionally verify SHA-512 against stored value
                 if let Some(stored) = stored_sha512s {
-                    if let Some(stored_sha512) = stored.get(&filename) {
+                    if let Some(stored_sha512) = stored.get(filename.as_str()) {
                         if hashes.sha512 != *stored_sha512 {
                             error!(module, expected = %stored_sha512, actual = %hashes.sha512, "SHA-512 mismatch");
-                            failures.push(Error::Sha512Mismatch { filename });
+                            failures.push(Error::Sha512Mismatch {
+                                filename: filename.clone(),
+                            });
                             continue;
                         }
                         debug!(module, "SHA-512 verified");
@@ -69,7 +75,7 @@ pub fn download_and_verify<S: ::std::hash::BuildHasher>(
 
                 info!(module, "ok");
                 results.push(ModuleHash {
-                    filename,
+                    filename: filename.clone(),
                     sha512: hashes.sha512,
                 });
             }
