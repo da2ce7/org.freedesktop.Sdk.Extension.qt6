@@ -4,3 +4,6 @@
 [submodule "docs/notes/org.freedesktop.Sdk.Extension.qt6"]
 	path = docs/notes/org.freedesktop.Sdk.Extension.qt6
 	url = https://github.com/4c0n/org.freedesktop.Sdk.Extension.qt6.git
+[submodule "docs/notes/org.freedesktop.Sdk.Extension.rust-stable"]
+	path = docs/notes/org.freedesktop.Sdk.Extension.rust-stable
+	url = https://github.com/flathub/org.freedesktop.Sdk.Extension.rust-stable
