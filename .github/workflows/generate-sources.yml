@@ -3,13 +3,21 @@ name: Generate Sources
 on:
   push:
   schedule:
-    - cron: '0 6 * * 1'
+    # Daily: quick md5 sentinel check
+    - cron: '0 6 * * *'
+    # Weekly (Monday): full SHA-512 + MD5 verification of all archives
+    - cron: '0 8 * * 1'
   workflow_dispatch:
     inputs:
       qt_version:
         description: 'Qt version (e.g. 6.11.0)'
         required: true
         default: '6.11.0'
+      force_verify:
+        description: 'Force full hash verification even if md5sums sentinel is unchanged'
+        required: false
+        type: boolean
+        default: false
 
 env:
   CARGO_TERM_COLOR: always
@@ -39,7 +47,17 @@ jobs:
 
       - id: check
         name: Check Sources Against Upstream
+        env:
+          # Weekly schedule or manual force_verify → full verification
+          FORCE_VERIFY: ${{ github.event.schedule == '0 8 * * 1' || github.event.inputs.force_verify == 'true' }}
         run: |
+          FORCE_FLAG=""
+          if [ "$FORCE_VERIFY" = "true" ]; then
+            echo "::notice::Running full hash verification (MD5 + SHA-512)"
+            FORCE_FLAG="--force"
+          fi
+
           ./target/release/qt-sources-gen \
             --version "$QT_VERSION" \
-            --sources sources
+            --sources sources \
+            $FORCE_FLAG
