@@ -7,3 +7,7 @@
 [submodule "docs/notes/org.freedesktop.Sdk.Extension.rust-stable"]
 	path = docs/notes/org.freedesktop.Sdk.Extension.rust-stable
 	url = https://github.com/flathub/org.freedesktop.Sdk.Extension.rust-stable
+[submodule "draft/flathub"]
+	path = draft/flathub
+	url = git@github.com:da2ce7/flathub.git
+	branch = new-pr
