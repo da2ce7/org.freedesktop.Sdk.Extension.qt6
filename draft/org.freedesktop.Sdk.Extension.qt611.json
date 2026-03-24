@@ -487,7 +487,7 @@
         {
           "type": "archive",
           "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtquickeffectmaker-everywhere-src-6.11.0.tar.xz",
-          "sha512": "FIXME"
+          "sha512": "4fba30bfd6d1d16c45b3017a66eeb2370d543dde21274a0ed12182d2a4a74a486de38a555d250113f2c431270da66442df6cdcfc67df3a0083c377742e392c6c"
         }
       ]
     },
@@ -690,7 +690,7 @@
         {
           "type": "archive",
           "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtwebview-everywhere-src-6.11.0.tar.xz",
-          "sha512": "FIXME"
+          "sha512": "79331399d177c7906f45b34088db3a5d8004810df18dae786768f84ae13ee3bd82d6b0e3416114ba6c93f095412300b3cc914317c1053582ae46f3fdf1cb446c"
         }
       ]
     },

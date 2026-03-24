@@ -1,6 +1,6 @@
 # ADR-001: Manifest Structure and Build Strategy
 
-**Status:** Proposed  
+**Status:** Decided  
 **Date:** 2026-03-24  
 **Relates to:** [ADR-001 (project)](../../adr/001-project-goals.md)
 (project goals and scope)
@@ -187,6 +187,78 @@ points.
 - The metainfo explicitly documents that QtWebEngine is excluded,
   setting expectations for consumers.
 
+### 9. LLVM SDK extension dependency
+
+The manifest declares `org.freedesktop.Sdk.Extension.llvm22` as a
+build-time `sdk-extensions` dependency rather than bundling LLVM
+internally.
+
+**Rationale:**
+
+- **Build cost.** LLVM is a multi-gigabyte build. The llvm22 extension
+  already exists on Flathub and is maintained independently.
+- **Composability.** Flathub SDK extensions are designed to be
+  composable. Multiple extensions that need LLVM should share one copy
+  rather than each bundling their own.
+- **Precedent.** The llvm22 extension exists specifically to serve this
+  role for downstream consumers.
+
+At build time, `prepend-path` adds `/usr/lib/sdk/llvm22/bin` and
+`prepend-ld-library-path` adds `/usr/lib/sdk/llvm22/lib` so that
+CMake finds clang and LLVM libraries.
+
+### 10. Debug-symbol-free release build
+
+The `build-options` block sets:
+
+```json
+"cflags": "-g0",
+"cxxflags": "-g0"
+```
+
+combined with `-DCMAKE_BUILD_TYPE=Release` in every module.
+
+**Rationale:**
+
+- **Extension size.** Debug symbols for 38 Qt modules add gigabytes to
+  the installed extension. SDK extension consumers need libraries and
+  headers, not debuginfo.
+- **Flathub convention.** The llvm22 extension also builds with
+  `Release` and stripped symbols.
+- **Debuginfo availability.** If Flatpak debuginfo extensions are
+  needed in the future, they can be generated as a separate
+  `-Debug` extension — the base extension should remain lean.
+
+### 11. Excluded modules
+
+Three Qt modules shipped in the 6.11.0 release are deliberately
+excluded:
+
+| Module | Reason |
+|---|---|
+| **QtWebEngine** | Embeds Chromium — prohibitive build size (~40 GB intermediates), hours of compile time, and independent security update cadence. Applications needing WebEngine should use a dedicated extension. |
+| **QtActiveQt** | Windows-only COM/ActiveX bridge — has no function on Linux and cannot build in the Flatpak sandbox. |
+| **QtDoc** | Documentation-only module. Excluded per decision §4 (no docs or examples). |
+
+The metainfo XML explicitly notes the QtWebEngine exclusion so that
+consumers discover it before depending on the extension.
+
+### 12. `separate-locales: false`
+
+The manifest sets `"separate-locales": false`, keeping translation
+files in the main extension rather than splitting them into a
+`.Locale` sub-extension.
+
+**Rationale:**
+
+- **Simplicity.** Qt translations (installed by `qttranslations`) are
+  small relative to the libraries themselves. Splitting them into a
+  separate locale extension adds OSTree ref complexity with negligible
+  size savings.
+- **Completeness.** Consumers get a fully functional Qt — including
+  localised strings for standard dialogs and widgets — without needing
+  to also install a locale extension.
+
 ## Consequences
 
 - The manifest is structurally consistent with active Flathub SDK
@@ -198,6 +270,17 @@ points.
 - Omitting docs and examples keeps the extension lean and the build
   fast, at the cost of not providing offline documentation — consumers
   are directed to `doc.qt.io`.
+- The LLVM22 dependency means the extension cannot build on runtimes
+  older than 25.08 or without the LLVM extension installed.
+- Debug-symbol stripping keeps the installed extension small but means
+  consumers cannot debug into Qt itself without a separate debuginfo
+  build.
+- Excluding QtWebEngine is the single largest scope constraint:
+  applications that need it must find an alternative. This is
+  documented in the metainfo to prevent surprises.
+- `separate-locales: false` trades a small amount of download size for
+  a simpler, self-contained extension that works out of the box in
+  any locale.
 - The uniform build recipe simplifies adding future Qt submodules but
   may need per-module overrides as Qt evolves (e.g. modules requiring
   additional system dependencies or non-standard CMake variables).
