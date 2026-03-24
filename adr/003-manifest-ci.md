@@ -1,6 +1,6 @@
 # ADR-003: CI Strategy for the Draft Manifest
 
-**Status:** Proposed  
+**Status:** Accepted  
 **Date:** 2026-03-24  
 **Relates to:** [ADR-001](001-project-goals.md) (project goals),
 [ADR-001 (draft)](../draft/adr/001-manifest-design.md) (manifest

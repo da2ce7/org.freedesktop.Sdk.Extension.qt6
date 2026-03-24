@@ -1,0 +1,134 @@
+name: Draft Manifest CI
+
+on:
+  push:
+    paths:
+      - "draft/**"
+      - "sources"
+  pull_request:
+    paths:
+      - "draft/**"
+      - "sources"
+  workflow_dispatch:
+
+jobs:
+  lint-manifest:
+    name: Lint Manifest
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-builder-lint:latest
+
+    steps:
+      - id: checkout
+        name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - id: lint
+        name: Run flatpak-builder-lint
+        run: flatpak-builder-lint manifest draft/org.freedesktop.Sdk.Extension.qt611.json
+
+  validate-metainfo:
+    name: Validate Metainfo
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: checkout
+        name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - id: install-appstream
+        name: Install appstream
+        run: sudo apt-get update && sudo apt-get install -y appstream
+
+      - id: validate
+        name: Validate Metainfo XML
+        run: appstreamcli validate --no-net draft/org.freedesktop.Sdk.Extension.qt611.metainfo.xml
+
+  check-hashes:
+    name: Check Hash Consistency
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: checkout
+        name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - id: check
+        name: Cross-check manifest hashes against sources file
+        run: |
+          manifest="draft/org.freedesktop.Sdk.Extension.qt611.json"
+          sources_file="sources"
+          rc=0
+
+          # Extract (url, sha512) pairs from archive sources in the manifest
+          pairs=$(jq -r '
+            .modules[]
+            | .sources[]?
+            | select(.type == "archive")
+            | "\(.url) \(.sha512)"
+          ' "$manifest")
+
+          if [ -z "$pairs" ]; then
+            echo "::error::No archive sources found in manifest"
+            exit 1
+          fi
+
+          while IFS=' ' read -r url hash; do
+            filename=$(basename "$url")
+            # Look up the hash in the sources file (BSD-style: SHA512 (filename) = hash)
+            sources_hash=$(grep -F "($filename)" "$sources_file" | sed 's/.*= //')
+            if [ -z "$sources_hash" ]; then
+              echo "::error::$filename not found in $sources_file"
+              rc=1
+              continue
+            fi
+            if [ "$hash" != "$sources_hash" ]; then
+              echo "::error::Hash mismatch for $filename"
+              echo "  manifest: $hash"
+              echo "  sources:  $sources_hash"
+              rc=1
+            else
+              echo "OK: $filename"
+            fi
+          done <<< "$pairs"
+
+          exit $rc
+
+  build-qtbase:
+    name: Build qtbase (smoke test)
+    runs-on: ubuntu-latest
+    needs: [lint-manifest, validate-metainfo, check-hashes]
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - id: checkout
+        name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - id: setup-flatpak
+        name: Install Flatpak
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flatpak flatpak-builder
+
+      - id: add-remote
+        name: Add Flathub remote
+        run: |
+          sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+      - id: install-deps
+        name: Install SDK and extensions
+        run: |
+          sudo flatpak install -y flathub \
+            org.freedesktop.Sdk//25.08 \
+            org.freedesktop.Platform//25.08 \
+            org.freedesktop.Sdk.Extension.llvm22//25.08
+
+      - id: build
+        name: Build qtbase only
+        run: |
+          flatpak-builder --user --force-clean \
+            --install-deps-from=flathub \
+            --stop-at=qtshadertools \
+            builddir \
+            draft/org.freedesktop.Sdk.Extension.qt611.json
