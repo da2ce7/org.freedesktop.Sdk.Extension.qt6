@@ -1,0 +1,6 @@
+[submodule "docs/notes/org.freedesktop.Sdk.Extension.llvm22"]
+	path = docs/notes/org.freedesktop.Sdk.Extension.llvm22
+	url = https://github.com/flathub/org.freedesktop.Sdk.Extension.llvm22.git
+[submodule "docs/notes/org.freedesktop.Sdk.Extension.qt6"]
+	path = docs/notes/org.freedesktop.Sdk.Extension.qt6
+	url = https://github.com/4c0n/org.freedesktop.Sdk.Extension.qt6.git

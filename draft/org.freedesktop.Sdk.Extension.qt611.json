@@ -1,0 +1,732 @@
+{
+  "id": "org.freedesktop.Sdk.Extension.qt611",
+  "branch": "25.08",
+  "runtime": "org.freedesktop.Sdk",
+  "runtime-version": "25.08",
+  "sdk": "org.freedesktop.Sdk",
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.llvm22"
+  ],
+  "build-extension": true,
+  "separate-locales": false,
+  "build-options": {
+    "prefix": "/usr/lib/sdk/qt611",
+    "prepend-path": "/usr/lib/sdk/qt611/bin:/usr/lib/sdk/llvm22/bin",
+    "prepend-pkg-config-path": "/usr/lib/sdk/qt611/lib/pkgconfig",
+    "prepend-ld-library-path": "/usr/lib/sdk/qt611/lib:/usr/lib/sdk/llvm22/lib",
+    "cflags": "-g0",
+    "cxxflags": "-g0",
+    "env": {
+      "CMAKE_PREFIX_PATH": "/usr/lib/sdk/qt611"
+    }
+  },
+  "modules": [
+    {
+      "name": "qtbase",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF",
+        "-DINSTALL_ARCHDATADIR=lib",
+        "-DINSTALL_DATADIR=share",
+        "-DINSTALL_DOCDIR=share/doc/qt6",
+        "-DINSTALL_EXAMPLESDIR=share/doc/qt6/examples",
+        "-DINSTALL_INCLUDEDIR=include/qt6",
+        "-DINSTALL_MKSPECSDIR=lib/mkspecs",
+        "-DINPUT_openssl=linked",
+        "-DQT_FEATURE_journald=OFF",
+        "-DQT_FEATURE_openssl_linked=ON",
+        "-DQT_FEATURE_reduce_relocations=OFF",
+        "-DQT_FEATURE_rpath=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtbase-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtshadertools",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtshadertools-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtsvg",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtsvg-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtimageformats",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtimageformats-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtlanguageserver",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtlanguageserver-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtdeclarative",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtdeclarative-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qttools",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qttools-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtwayland",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtwayland-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtmultimedia",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtmultimedia-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qt5compat",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qt5compat-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtwebsockets",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtwebsockets-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtwebchannel",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtwebchannel-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtpositioning",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtpositioning-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtlocation",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtlocation-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtconnectivity",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtconnectivity-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtserialport",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtserialport-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtserialbus",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtserialbus-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtsensors",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtsensors-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtscxml",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtscxml-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtremoteobjects",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtremoteobjects-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtcharts",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtcharts-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtnetworkauth",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtnetworkauth-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qthttpserver",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qthttpserver-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtquicktimeline",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtquicktimeline-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtquick3d",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtquick3d-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtquick3dphysics",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtquick3dphysics-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtquickeffectmaker",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtquickeffectmaker-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qt3d",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qt3d-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtdatavis3d",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtdatavis3d-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtgraphs",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtgraphs-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtgrpc",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtgrpc-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtspeech",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtspeech-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtvirtualkeyboard",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtvirtualkeyboard-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtlottie",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtlottie-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtcanvaspainter",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtcanvaspainter-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtopenapi",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtopenapi-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qttasktree",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qttasktree-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qttranslations",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qttranslations-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "qtwebview",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_BUILD_EXAMPLES=OFF",
+        "-DQT_BUILD_TESTS=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.qt.io/official_releases/qt/6.11/6.11.0/submodules/qtwebview-everywhere-src-6.11.0.tar.xz",
+          "sha256": "FIXME"
+        }
+      ]
+    },
+    {
+      "name": "scripts",
+      "buildsystem": "simple",
+      "build-commands": [
+        "cp enable.sh /usr/lib/sdk/qt611/"
+      ],
+      "sources": [
+        {
+          "type": "script",
+          "commands": [
+            "export PATH=/usr/lib/sdk/qt611/bin:$PATH",
+            "export LD_LIBRARY_PATH=/usr/lib/sdk/qt611/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}",
+            "export PKG_CONFIG_PATH=/usr/lib/sdk/qt611/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}",
+            "export CMAKE_PREFIX_PATH=/usr/lib/sdk/qt611${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}",
+            "export QT_PLUGIN_PATH=/usr/lib/sdk/qt611/lib/plugins${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}",
+            "export QML2_IMPORT_PATH=/usr/lib/sdk/qt611/lib/qml${QML2_IMPORT_PATH:+:$QML2_IMPORT_PATH}"
+          ],
+          "dest-filename": "enable.sh"
+        }
+      ]
+    },
+    {
+      "name": "appdata",
+      "buildsystem": "simple",
+      "build-commands": [
+        "install -Dm0644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.metainfo.xml"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "path": "org.freedesktop.Sdk.Extension.qt611.metainfo.xml"
+        }
+      ]
+    }
+  ]
+}

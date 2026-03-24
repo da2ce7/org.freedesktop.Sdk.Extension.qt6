@@ -1,0 +1,45 @@
+name: Generate Sources
+
+on:
+  push:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      qt_version:
+        description: 'Qt version (e.g. 6.11.0)'
+        required: true
+        default: '6.11.0'
+
+env:
+  CARGO_TERM_COLOR: always
+  QT_VERSION: ${{ github.event.inputs.qt_version || '6.11.0' }}
+
+jobs:
+  check-sources:
+    name: Check Sources
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: checkout
+        name: Checkout Repository
+        uses: actions/checkout@v6
+
+      - id: setup
+        name: Setup Toolchain
+        uses: dtolnay/rust-toolchain@1.91
+
+      - id: cache
+        name: Enable Workflow Cache
+        uses: Swatinem/rust-cache@v2
+
+      - id: build
+        name: Build qt-sources-gen
+        run: cargo build --release -p qt-sources-gen
+
+      - id: check
+        name: Check Sources Against Upstream
+        run: |
+          ./target/release/qt-sources-gen \
+            --version "$QT_VERSION" \
+            --sources sources
