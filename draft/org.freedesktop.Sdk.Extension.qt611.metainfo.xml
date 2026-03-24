@@ -2,11 +2,14 @@
 <component type="runtime">
   <id>org.freedesktop.Sdk.Extension.qt611</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>LGPL-3.0-only AND GPL-3.0-only AND GPL-2.0-only AND Qt-GPL-exception-1.0</project_license>
+  <project_license>LGPL-3.0-only AND GPL-3.0-only AND GPL-2.0-only WITH Qt-GPL-exception-1.0</project_license>
+  <developer id="org.qt-project">
+    <name>The Qt Project</name>
+  </developer>
   <name>Qt 6.11</name>
   <summary>Qt 6.11 development framework</summary>
   <description>
-    <p>This extension contains the Qt 6.11 libraries and development tools.</p>
+    <p>This extension contains the Qt 6.11 libraries and development tools, providing a comprehensive cross-platform application framework for building modern desktop and embedded applications.</p>
     <p>Included modules: QtBase, QtDeclarative (QML/Quick), QtWayland, QtMultimedia,
        QtSvg, QtImageFormats, QtTools, QtShaderTools, Qt5Compat, QtWebSockets,
        QtWebChannel, QtPositioning, QtLocation, QtConnectivity, QtSerialPort,
