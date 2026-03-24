@@ -5,7 +5,7 @@ A Flatpak SDK extension providing Qt 6.11 for the
 
 ## Overview
 
-This extension builds 38 Qt 6.11 submodules from source, giving Flatpak
+This extension builds 39 Qt 6.11 submodules from source, giving Flatpak
 applications access to Qt without depending on the full KDE runtime.
 QtWebEngine and QtActiveQt are excluded.
 

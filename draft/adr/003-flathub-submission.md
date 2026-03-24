@@ -45,7 +45,7 @@ applications. Key policies and how they apply:
 | **Manifest at top level** — named after the ID with `.json`/`.yml`/`.yaml` | Applies. `org.freedesktop.Sdk.Extension.qt611.json` | Compliant |
 | **flathub.json** — architecture constraints and build flags | Applies. Must include `only-arches`, `skip-appstream-check`, `skip-icons-check` (SDK extensions have no desktop icons or strict appstream requirements). | Compliant |
 | **Metainfo file (optional for extensions)** — but recommended to appear on Flathub website | Optional. We provide `org.freedesktop.Sdk.Extension.qt611.metainfo.xml` for visibility. | Included |
-| **No network access during build** — all sources must have publicly accessible URLs | Applies. All 38 Qt submodule tarballs are fetched from `download.qt.io` with SHA-512 hashes. | Compliant |
+| **No network access during build** — all sources must have publicly accessible URLs | Applies. All 39 Qt submodule tarballs are fetched from `download.qt.io` with SHA-512 hashes. | Compliant |
 | **Building from source** — all components built from source code | Applies. All modules built with `cmake-ninja` from source archives. | Compliant |
 | **License** — must be correctly specified in metainfo and allow redistribution | Applies. Qt is `LGPL-3.0-only AND GPL-3.0-only AND GPL-2.0-only WITH Qt-GPL-exception-1.0`. | Declared in metainfo |
 | **License of contents in Flathub repository** — permissive license recommended for manifests | Applies. The submission repo should include a license file (e.g. MIT) for the manifest and build scripts. | To be added |

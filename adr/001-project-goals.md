@@ -41,7 +41,7 @@ release.
   convention for composable SDK extensions.
 - **Source build.** Unlike the Fedora container approach (pre-built
   RPMs), Flathub extensions must build from source inside the
-  `flatpak-builder` sandbox. All 38 Qt submodules are built with
+  `flatpak-builder` sandbox. All 39 Qt submodules are built with
   `cmake-ninja`.
 - **CI-driven source verification.** Qt source archives change without
   URL changes when point releases are re-spun. A Rust tool
@@ -62,7 +62,7 @@ the following characteristics:
    layout; applications activate it via `enable.sh`).
 4. **Qt version:** 6.11.0 (released 2026-03-23), tracking the 6.11.x
    series for patch updates.
-5. **Module set:** 38 submodules built from source in dependency order —
+5. **Module set:** 39 submodules built from source in dependency order —
    `qtbase` first, then `qtshadertools`, `qtdeclarative`, and the
    remainder. QtWebEngine and QtActiveQt are excluded.
 6. **Architecture:** x86\_64 and aarch64.

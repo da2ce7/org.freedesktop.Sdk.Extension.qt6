@@ -8,7 +8,7 @@
 ## Context
 
 The draft manifest
-(`org.freedesktop.Sdk.Extension.qt611.json`) must define how 38 Qt
+(`org.freedesktop.Sdk.Extension.qt611.json`) must define how 39 Qt
 submodules are fetched, configured, built, and installed inside the
 `flatpak-builder` sandbox. Several design choices differ from the only
 prior art — the stale
@@ -149,7 +149,7 @@ overrides) are added on top of this baseline.
 
 ### 6. Dependency-ordered module list
 
-The 38 modules appear in topological dependency order in the manifest:
+The 39 modules appear in topological dependency order in the manifest:
 
 1. `qtbase` (no Qt dependencies)
 2. `qtshadertools` (depends on qtbase)
@@ -220,7 +220,7 @@ combined with `-DCMAKE_BUILD_TYPE=Release` in every module.
 
 **Rationale:**
 
-- **Extension size.** Debug symbols for 38 Qt modules add gigabytes to
+- **Extension size.** Debug symbols for 39 Qt modules add gigabytes to
   the installed extension. SDK extension consumers need libraries and
   headers, not debuginfo.
 - **Flathub convention.** The llvm22 extension also builds with

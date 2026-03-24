@@ -10,7 +10,7 @@ structured output)
 ## Context
 
 `qt-sources-gen` has grown from a simple sentinel-checker into a tool
-that downloads ~38 Qt archive tarballs, computes dual hashes (MD5 +
+that downloads ~39 Qt archive tarballs, computes dual hashes (MD5 +
 SHA-512), parses `md5sums.txt`, and supports multiple operating modes
 (`--dry-run`, `--force`). All of this logic currently lives in a single
 `check_sources` function spanning ~130 lines in `lib.rs`, with several
